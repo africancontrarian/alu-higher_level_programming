@@ -9,4 +9,3 @@ def add_tuple(tuple_a=(), tuple_b=()):
     second_b = tuple_b[1] if len(tuple_b) > 1 else 0
 
     return (first_a + first_b, second_a + second_b)
-
