@@ -18,9 +18,13 @@ def roman_to_int(roman_string):
     total = 0
 
     for i, char in enumerate(roman_string):
-        if i + 1 < len(roman_string) and roman_values[char] < roman_values[roman_string[i + 1]]:
-            total -= roman_values[char]
+        current_value = roman_values[char]
+        next_value = (roman_values[roman_string[i + 1]]
+                      if i + 1 < len(roman_string) else 0)
+        
+        if current_value < next_value:
+            total -= current_value
         else:
-            total += roman_values[char]
+            total += current_value
 
     return total
