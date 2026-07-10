@@ -18,7 +18,7 @@ def roman_to_int(roman_string):
         if char not in roman_values:
             return 0
         current_value = roman_values[char]
-        next_value = (roman_values[roman_string[i + 1]] 
+        next_value = (roman_values[roman_string[i + 1]]
                       if i + 1 < len(roman_string) else 0)
         if current_value < next_value:
             total -= current_value
