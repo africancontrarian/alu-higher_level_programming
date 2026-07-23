@@ -28,3 +28,5 @@ load -> deserialize round trip.
 | `10-student.py`              | `Student` with `to_json(attrs=None)` attribute filtering              |
 | `11-student.py`              | `Student` adds `reload_from_json(json)` for a full round trip        |
 | `12-pascal_triangle.py`      | `pascal_triangle(n)` — Pascal's triangle as a list of lists          |
+| `100-append_after.py`        | `append_after(filename, search_string, new_string)` — insert a line after every matching line |
+| `101-stats.py`               | Script: reads HTTP access logs from stdin, prints size/status-code metrics every 10 lines and on interrupt |
