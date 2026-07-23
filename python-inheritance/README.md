@@ -28,5 +28,7 @@ privacy, validation, and method overriding through inheritance.
 | `9-rectangle.py`         | `Rectangle` with `area()` and `__str__`                                |
 | `10-square.py`           | `Square(Rectangle)` built from a single `size`                        |
 | `11-square.py`           | `Square` with its own `__str__`                                        |
+| `100-my_int.py`          | `MyInt(int)` — `==`/`!=` inverted (advanced)                          |
+| `101-add_attribute.py`   | `add_attribute(obj, name, value)` — only if `obj` allows it (advanced) |
 | `tests/1-my_list.txt`    | Doctest coverage for `MyList`                                          |
 | `tests/7-base_geometry.txt` | Doctest coverage for `BaseGeometry`                                |
