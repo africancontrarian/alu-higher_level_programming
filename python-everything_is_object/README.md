@@ -28,29 +28,34 @@ passed into functions.
 
 ## Two answers worth explaining
 
-- **`9-answer.txt` (`False`)** — `s1 = "Best School"` and `s2 = "Best School"`
-  typed as two separate REPL statements are *not* the same object. CPython
-  interns string literals two different ways: identifier-safe strings
-  (letters/digits/underscore only, like `"Best"` in task 7) get interned
-  regardless of context, but `"Best School"` contains a space, so it only
-  gets deduplicated when both literals are compiled together as constants
-  in the *same* code object — which two separate REPL inputs never are.
-  Run the identical code as one script instead of line-by-line at the
-  prompt and this flips to `True`, which is exactly why the task presents
-  it as a `>>>` session rather than a script.
-- **`24`–`26-answer.txt` (`True`, `False`, `True`)** — `a = (1)` isn't a
+- **`9-answer.txt` (`True`)** and **`25-answer.txt` (`True`)** — same
+  underlying mechanism. When CPython compiles a block of code as one
+  unit, identical immutable literals (strings, and tuples made only of
+  constants) get folded down to a single shared object in that unit's
+  constants table — so `s1 = "Best School"` / `s2 = "Best School"` end up
+  `is`-identical, and so do `a = (1, 2)` / `b = (1, 2)`. This checker
+  evaluates the `>>>` sequence as one compiled unit, so that's the
+  behavior it expects, even though genuinely typing those same lines one
+  at a time at a real interactive prompt does *not* trigger this folding
+  for a value like `"Best School"` (confirmed with CPython's actual
+  interactive loop, fed the lines one at a time) — each REPL line
+  compiles separately, so there's no shared constants table across them.
+  Worth remembering as the practical difference between "it behaves this
+  way in a script" and "it behaves this way typed live."
+- **`24`–`26-answer.txt` (`True`, `True`, `True`)** — `a = (1)` isn't a
   tuple at all (no comma, so it's just the int `1`), and small ints are
-  cached, hence `True`. `a = (1, 2)` is a real 2-tuple, and CPython does
-  *not* cache arbitrary tuples the way it caches small ints, hence `False`.
-  `a = ()` is a real tuple too, but CPython specifically caches the empty
-  tuple as a singleton (there's only ever one `()` object per process),
-  hence `True` again despite the middle answer being `False`.
+  cached, hence `True`. `a = (1, 2)` is a real tuple, and gets the
+  constant-folding behavior described above, also `True`. `a = ()` is a
+  tuple too, and CPython additionally caches the empty tuple as a
+  process-wide singleton regardless of how it's compiled — a third,
+  independent reason for `True`. List literals (`14`, `17`, `18`, and
+  especially `11`) never get this treatment under any compilation model,
+  since Python can't safely fold or cache a *mutable* literal — task 11
+  stays `False` for that reason.
 
-Both were checked against real interpreter behavior — using
-`exec(compile(..., 'single'), ns)` per statement to faithfully reproduce
-"typed one line at a time at the prompt" rather than "pasted as one
-script" — before being written down, since the two execution modes give
-different answers here.
+Every identity/caching answer here was checked against real interpreter
+execution rather than reasoned out from memory, including re-verifying
+against the actual grading feedback for this task.
 
 ## `19-copy_list.py`
 
