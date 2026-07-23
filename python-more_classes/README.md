@@ -39,6 +39,7 @@ Each file is cumulative — it adds one feature on top of the previous file.
 | `7-rectangle.py` | `print_symbol` class attribute — `__str__` uses it instead of a fixed `#`   |
 | `8-rectangle.py` | `bigger_or_equal()` static method — compares two rectangles by area         |
 | `9-rectangle.py` | `square()` class method — builds a `Rectangle` with `width == height`       |
+| `101-nqueens.py` | N queens solver (backtracking) — independent of the `Rectangle` series      |
 
 ## Usage
 
@@ -82,6 +83,24 @@ $ python3
   `self.print_symbol`, not a private/mangled name, so it naturally picks
   up either a per-instance override (`my_rect.print_symbol = "&"`) or a
   class-wide change (`Rectangle.print_symbol = "C"`) with no extra code.
+
+## `101-nqueens.py`
+
+Solves the N queens puzzle with classic row-by-row backtracking: place a
+queen in the first open row at every column that isn't attacked by a
+queen already placed, recurse, and undo (`board[row] = -1`) whenever a
+branch runs out of safe columns. Each complete placement is printed as
+`[[row, col], [row, col], ...]`.
+
+```bash
+$ ./101-nqueens.py 4
+[[0, 1], [1, 3], [2, 0], [3, 2]]
+[[0, 2], [1, 0], [2, 3], [3, 1]]
+```
+
+Validation, in order: wrong argument count → `Usage: nqueens N`; `N` not
+parseable as an int → `N must be a number`; `N < 4` → `N must be at
+least 4`. All three exit with status 1.
 
 ## Author
 
