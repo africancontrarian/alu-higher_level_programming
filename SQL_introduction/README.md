@@ -33,3 +33,11 @@ simple functions (`COUNT`, `AVG`) and `GROUP BY`.
 | `14-average.sql`                       | Compute the average score (column `average`)                     |
 | `15-groups.sql`                        | Count records per score, ordered by count descending             |
 | `16-no_link.sql`                       | List records with a non-`NULL` name, ordered by score descending |
+| `100-move_to_utf8.sql`                 | Convert `hbtn_0c_0`, `first_table`, and its `name` column to `utf8mb4`/`utf8mb4_unicode_ci` |
+| `101-avg_temperatures.sql`             | Average temperature by city (`temperatures` table), ordered by temperature descending |
+| `102-top_city.sql`                     | Top 3 cities by average temperature in July/August, descending    |
+| `103-max_state.sql`                    | Max temperature per state, ordered by state name                  |
+
+Tasks 101-103 query a `temperatures` table (`id`, `city`, `state`, `month`,
+`day`, `year`, `temperature`) imported from the dump provided with the
+project; the scripts themselves only contain the `SELECT` queries.
