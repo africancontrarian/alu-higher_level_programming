@@ -1,0 +1,47 @@
+The ``1-my_list`` module
+=========================
+
+Using ``MyList``
+-----------------
+
+Load the class:
+
+    >>> MyList = __import__('1-my_list').MyList
+
+Create a new, empty instance:
+
+    >>> my_list = MyList()
+    >>> my_list
+    []
+
+Add a few integers in an unsorted order:
+
+    >>> my_list.append(1)
+    >>> my_list.append(4)
+    >>> my_list.append(2)
+    >>> my_list.append(3)
+    >>> my_list.append(5)
+    >>> print(my_list)
+    [1, 4, 2, 3, 5]
+
+Calling ``print_sorted`` displays the values in ascending order:
+
+    >>> my_list.print_sorted()
+    [1, 2, 3, 4, 5]
+
+The original order of the list itself stays untouched:
+
+    >>> print(my_list)
+    [1, 4, 2, 3, 5]
+
+``MyList`` still behaves like a normal list:
+
+    >>> len(my_list)
+    5
+    >>> isinstance(my_list, list)
+    True
+
+Sorting an empty list prints an empty list:
+
+    >>> MyList().print_sorted()
+    []
