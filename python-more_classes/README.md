@@ -72,10 +72,12 @@ $ python3
 
 ## A couple of notes
 
-- In `1-rectangle.py` onward, `__init__` sets `height` before `width` —
-  this isn't arbitrary: it's what makes `my_rectangle.__dict__` come back
-  as `{'_Rectangle__height': ..., '_Rectangle__width': ...}`, matching the
-  task's exact expected output.
+- In `1-rectangle.py` onward, `__init__` validates/sets `width` before
+  `height`. This matters beyond `__dict__` ordering: `9-rectangle.py`'s
+  `square(size)` calls `cls(size, size)`, so on an invalid `size` (e.g.
+  `Rectangle.square(-2)`), whichever attribute is assigned first is the
+  one named in the raised error — the checker expects `width must be...`,
+  not `height must be...`, so `width` has to go first.
 - `print_symbol` (from `7-rectangle.py` on) is looked up via plain
   `self.print_symbol`, not a private/mangled name, so it naturally picks
   up either a per-instance override (`my_rect.print_symbol = "&"`) or a
