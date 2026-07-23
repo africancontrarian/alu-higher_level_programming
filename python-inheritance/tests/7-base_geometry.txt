@@ -21,6 +21,20 @@ Load the class and create an instance:
     >>> bg.integer_validator("width", 89)
     >>> bg.integer_validator("height", 1)
 
+Calling it without any arguments raises a TypeError, since both
+``name`` and ``value`` are required:
+
+    >>> bg.integer_validator()  # doctest: +IGNORE_EXCEPTION_DETAIL
+    Traceback (most recent call last):
+    TypeError: ...
+
+Calling it with only ``name`` raises a TypeError, since ``value``
+is still required:
+
+    >>> bg.integer_validator("age")  # doctest: +IGNORE_EXCEPTION_DETAIL
+    Traceback (most recent call last):
+    TypeError: ...
+
 It rejects values that are not integers:
 
     >>> bg.integer_validator("name", "John")
@@ -36,6 +50,24 @@ Booleans are not accepted as integers either:
     >>> bg.integer_validator("flag", True)
     Traceback (most recent call last):
     TypeError: flag must be an integer
+
+Neither are tuples, lists, sets, or ``None``:
+
+    >>> bg.integer_validator("age", (4,))
+    Traceback (most recent call last):
+    TypeError: age must be an integer
+
+    >>> bg.integer_validator("age", [3])
+    Traceback (most recent call last):
+    TypeError: age must be an integer
+
+    >>> bg.integer_validator("age", {3, 4})
+    Traceback (most recent call last):
+    TypeError: age must be an integer
+
+    >>> bg.integer_validator("age", None)
+    Traceback (most recent call last):
+    TypeError: age must be an integer
 
 It rejects values that are zero or negative:
 
