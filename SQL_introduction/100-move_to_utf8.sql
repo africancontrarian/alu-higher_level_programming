@@ -1,9 +1,13 @@
--- Convert the hbtn_0c_0 database, its first_table, and the name column
--- of first_table to utf8mb4 with the utf8mb4_unicode_ci collation
-ALTER DATABASE hbtn_0c_0 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- Convert the hbtn_0c_0 database to utf8mb4
+ALTER DATABASE hbtn_0c_0
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
 
--- Set first_table's default character set to utf8mb4
-ALTER TABLE hbtn_0c_0.first_table CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- Convert first_table to utf8mb4
+ALTER TABLE hbtn_0c_0.first_table
+CONVERT TO CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
 
--- Explicitly convert the name column to utf8mb4
-ALTER TABLE hbtn_0c_0.first_table MODIFY name VARCHAR(256) COLLATE utf8mb4_unicode_ci;
+-- Change only the column collation
+ALTER TABLE hbtn_0c_0.first_table
+MODIFY name VARCHAR(256) COLLATE utf8mb4_unicode_ci;
