@@ -1,0 +1,101 @@
+The ``5-text_indentation`` module
+====================================
+
+This module defines ``text_indentation``, a function that prints a
+block of text, inserting two new lines after every '.', '?', and ':'
+character, with no leading or trailing spaces on any printed line.
+
+Import the function
+--------------------
+
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+
+Basic usage with a short sentence
+-------------------------------------
+
+    >>> text_indentation("Hello. World? Bye:end")
+    Hello.
+    <BLANKLINE>
+    World?
+    <BLANKLINE>
+    Bye:
+    <BLANKLINE>
+    end
+
+The full example from the project description
+----------------------------------------------------
+
+    >>> text_indentation("""Lorem ipsum dolor sit amet, consectetur adipiscing elit. \
+    ... Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere? \
+    ... Non autem hoc: igitur ne illud quidem. Fortasse id optimum, sed ubi illud: \
+    ... Plus semper voluptatis? Teneo, inquit, finem illi videri nihil dolere. \
+    ... Transfer idem ad modestiam vel temperantiam, quae est moderatio cupiditatum \
+    ... rationi oboediens. Si id dicis, vicimus. Inde sermone vario sex illa a Dipylo \
+    ... stadia confecimus. Sin aliud quid voles, postea. Quae animi affectio suum \
+    ... cuique tribuens atque hanc, quam dico. Utinam quidem dicerent alium alio \
+    ... beatiorem! Iam ruinas videres""")
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    <BLANKLINE>
+    Quonam modo?
+    <BLANKLINE>
+    Utrum igitur tibi litteram videor an totas paginas commovere?
+    <BLANKLINE>
+    Non autem hoc:
+    <BLANKLINE>
+    igitur ne illud quidem.
+    <BLANKLINE>
+    Fortasse id optimum, sed ubi illud:
+    <BLANKLINE>
+    Plus semper voluptatis?
+    <BLANKLINE>
+    Teneo, inquit, finem illi videri nihil dolere.
+    <BLANKLINE>
+    Transfer idem ad modestiam vel temperantiam, quae est moderatio cupiditatum rationi oboediens.
+    <BLANKLINE>
+    Si id dicis, vicimus.
+    <BLANKLINE>
+    Inde sermone vario sex illa a Dipylo stadia confecimus.
+    <BLANKLINE>
+    Sin aliud quid voles, postea.
+    <BLANKLINE>
+    Quae animi affectio suum cuique tribuens atque hanc, quam dico.
+    <BLANKLINE>
+    Utinam quidem dicerent alium alio beatiorem! Iam ruinas videres
+
+Edge cases
+------------
+
+An empty string prints nothing:
+
+    >>> text_indentation("")
+
+A string made only of spaces prints nothing:
+
+    >>> text_indentation("     ")
+
+A string with no special characters is printed as-is, with no
+trailing newline added by the function itself:
+
+    >>> text_indentation("Hi")
+    Hi
+
+A lone special character:
+
+    >>> text_indentation(".")
+    .
+    <BLANKLINE>
+
+``text`` must be a string
+----------------------------
+
+    >>> text_indentation(89)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+    >>> text_indentation(None)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+    >>> text_indentation([1, 2])
+    Traceback (most recent call last):
+    TypeError: text must be a string
