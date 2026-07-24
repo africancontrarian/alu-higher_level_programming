@@ -4,7 +4,7 @@ from urllib.request import urlopen
 
 
 if __name__ == "__main__":
-    with urlopen("https://alu-intranet.hbtn.io/status") as response:
+    with urlopen("https://intranet.hbtn.io/status") as response:
         body = response.read()
         print("Body response:")
         print("\t- type: {}".format(type(body)))
