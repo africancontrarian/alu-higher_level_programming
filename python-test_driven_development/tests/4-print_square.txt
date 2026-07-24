@@ -60,3 +60,13 @@ A size of 0 prints nothing
     >>> print_square(-1)
     Traceback (most recent call last):
     ValueError: size must be >= 0
+
+``size`` is a required argument
+-----------------------------------
+
+``print_square`` has no default value, so calling it with no
+arguments raises Python's own ``TypeError``.
+
+    >>> print_square()
+    Traceback (most recent call last):
+    TypeError: print_square() missing 1 required positional argument: 'size'
