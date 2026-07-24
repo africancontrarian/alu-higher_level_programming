@@ -123,3 +123,17 @@ Each row of ``m_b`` must be of the same size
     >>> matrix_mul([[1, 2]], [[1, 2]])
     Traceback (most recent call last):
     ValueError: m_a and m_b can't be multiplied
+
+Both ``m_a`` and ``m_b`` are required arguments
+-----------------------------------------------------
+
+``matrix_mul`` has no default values, so calling it without both
+arguments raises Python's own ``TypeError``.
+
+    >>> matrix_mul([[1, 2]])
+    Traceback (most recent call last):
+    TypeError: matrix_mul() missing 1 required positional argument: 'm_b'
+
+    >>> matrix_mul()
+    Traceback (most recent call last):
+    TypeError: matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
