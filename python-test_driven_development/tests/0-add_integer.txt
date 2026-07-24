@@ -82,3 +82,33 @@ Invalid types for ``b`` raise a TypeError
     >>> add_integer(1, False)
     Traceback (most recent call last):
     TypeError: b must be an integer
+
+Infinite floats are valid floats but can't be cast to int
+------------------------------------------------------------
+
+``float('inf')`` and ``float('-inf')`` pass the type check (they
+are genuine floats), but casting them to ``int`` overflows, so the
+built-in ``OverflowError`` propagates unchanged.
+
+    >>> add_integer(float('inf'))
+    Traceback (most recent call last):
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(float('-inf'))
+    Traceback (most recent call last):
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(1, float('inf'))
+    Traceback (most recent call last):
+    OverflowError: cannot convert float infinity to integer
+
+NaN is a valid float but can't be cast to int either
+--------------------------------------------------------
+
+    >>> add_integer(float('nan'))
+    Traceback (most recent call last):
+    ValueError: cannot convert float NaN to integer
+
+    >>> add_integer(1, float('nan'))
+    Traceback (most recent call last):
+    ValueError: cannot convert float NaN to integer
