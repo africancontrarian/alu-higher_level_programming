@@ -27,3 +27,4 @@ package: GET/POST requests, response headers, error handling, and JSON.
 | `7-error_code.py`        | Prints the body, or `Error code: <n>` for a 400+ status            |
 | `8-json_api.py`          | Searches `search_user` by letter, handles invalid/empty JSON       |
 | `10-my_github.py`        | GitHub user id via Basic Authentication                            |
+| `100-github_commits.py`  | Lists the 10 most recent commits of a GitHub repository            |
