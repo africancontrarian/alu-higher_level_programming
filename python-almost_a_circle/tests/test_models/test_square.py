@@ -2,6 +2,7 @@
 """Unittests for the Square class."""
 import unittest
 import io
+import os
 from contextlib import redirect_stdout
 from models.square import Square
 from models.rectangle import Rectangle
@@ -60,11 +61,29 @@ class TestSquareValidation(unittest.TestCase):
         with self.assertRaises(ValueError):
             Square(-5)
 
+    def test_non_int_x(self):
+        """A non-integer x raises the x TypeError."""
+        with self.assertRaises(TypeError) as e:
+            Square(1, "2")
+        self.assertEqual(str(e.exception), "x must be an integer")
+
     def test_negative_x(self):
         """A negative x raises the x ValueError."""
         with self.assertRaises(ValueError) as e:
             Square(1, -1)
         self.assertEqual(str(e.exception), "x must be >= 0")
+
+    def test_non_int_y(self):
+        """A non-integer y raises the y TypeError."""
+        with self.assertRaises(TypeError) as e:
+            Square(1, 2, "3")
+        self.assertEqual(str(e.exception), "y must be an integer")
+
+    def test_negative_y(self):
+        """A negative y raises the y ValueError."""
+        with self.assertRaises(ValueError) as e:
+            Square(1, 2, -3)
+        self.assertEqual(str(e.exception), "y must be >= 0")
 
 
 class TestSquareArea(unittest.TestCase):
@@ -188,6 +207,37 @@ class TestSquareToDictionary(unittest.TestCase):
         s2 = Square(1, 1)
         s2.update(**s1.to_dictionary())
         self.assertEqual(s1.to_dictionary(), s2.to_dictionary())
+
+
+class TestSquareSaveToFile(unittest.TestCase):
+    """Tests for save_to_file when called on the Square class."""
+
+    def setUp(self):
+        """Remove any leftover Square.json before each test."""
+        if os.path.exists("Square.json"):
+            os.remove("Square.json")
+
+    def tearDown(self):
+        """Remove the Square.json created by a test."""
+        if os.path.exists("Square.json"):
+            os.remove("Square.json")
+
+    def test_save_squares(self):
+        """A list of squares is written to Square.json."""
+        Square.save_to_file([Square(1)])
+        self.assertTrue(os.path.exists("Square.json"))
+
+    def test_save_none_writes_empty_list(self):
+        """Square.save_to_file(None) writes '[]' to Square.json."""
+        Square.save_to_file(None)
+        with open("Square.json") as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_save_empty_list_writes_empty_list(self):
+        """Square.save_to_file([]) writes '[]' to Square.json."""
+        Square.save_to_file([])
+        with open("Square.json") as f:
+            self.assertEqual(f.read(), "[]")
 
 
 if __name__ == "__main__":
