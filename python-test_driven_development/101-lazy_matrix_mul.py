@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Defines a function that multiplies two matrices using NumPy.
 
-Provides ``lazy_matrix_mul``, a thin wrapper around ``numpy.dot``
+Provides ``lazy_matrix_mul``, a thin wrapper around ``numpy.matmul``
 that lets NumPy validate the inputs and raise its own errors for
 invalid matrices.
 """
@@ -18,4 +18,4 @@ def lazy_matrix_mul(m_a, m_b):
     Returns:
         numpy.ndarray: The matrix product of ``m_a`` and ``m_b``.
     """
-    return np.dot(m_a, m_b)
+    return np.matmul(m_a, m_b)
