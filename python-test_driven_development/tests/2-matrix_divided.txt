@@ -96,3 +96,27 @@ Every row of ``matrix`` must have the same size
     >>> matrix_divided([[1, 2]], 0)
     Traceback (most recent call last):
     ZeroDivisionError: division by zero
+
+Dividing by an infinite ``div`` rounds every finite element to 0.0
+------------------------------------------------------------------------
+
+``div`` is a genuine float, and no element ever equals it, so no
+error is raised: every finite element divided by infinity rounds to
+0.0.
+
+    >>> matrix_divided([[1, 2], [3, 4]], float('inf'))
+    [[0.0, 0.0], [0.0, 0.0]]
+
+Both ``matrix`` and ``div`` are required arguments
+--------------------------------------------------------
+
+``matrix_divided`` has no default values, so calling it without
+both arguments raises Python's own ``TypeError``.
+
+    >>> matrix_divided([[1, 2]])
+    Traceback (most recent call last):
+    TypeError: matrix_divided() missing 1 required positional argument: 'div'
+
+    >>> matrix_divided()
+    Traceback (most recent call last):
+    TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
