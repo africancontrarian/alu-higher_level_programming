@@ -1,0 +1,84 @@
+The ``3-say_my_name`` module
+===============================
+
+This module defines ``say_my_name``, a function that prints
+'My name is <first name> <last name>' after validating that both
+names are strings.
+
+Import the function
+--------------------
+
+    >>> say_my_name = __import__('3-say_my_name').say_my_name
+
+Basic usage
+------------
+
+    >>> say_my_name("John", "Smith")
+    My name is John Smith
+
+    >>> say_my_name("Walter", "White")
+    My name is Walter White
+
+``last_name`` defaults to an empty string
+---------------------------------------------
+
+The printed line ends with a trailing space since ``last_name`` is
+empty; the output is captured and shown with ``repr`` below so the
+trailing space is unambiguous.
+
+    >>> import io, contextlib
+    >>> buf = io.StringIO()
+    >>> with contextlib.redirect_stdout(buf):
+    ...     say_my_name("Bob")
+    >>> buf.getvalue()
+    'My name is Bob \n'
+
+Both names can be empty strings
+----------------------------------
+
+    >>> buf = io.StringIO()
+    >>> with contextlib.redirect_stdout(buf):
+    ...     say_my_name("", "")
+    >>> buf.getvalue()
+    'My name is  \n'
+
+``first_name`` must be a string
+----------------------------------
+
+    >>> say_my_name(12, "White")
+    Traceback (most recent call last):
+    TypeError: first_name must be a string
+
+    >>> say_my_name(None)
+    Traceback (most recent call last):
+    TypeError: first_name must be a string
+
+    >>> say_my_name([1, 2], "White")
+    Traceback (most recent call last):
+    TypeError: first_name must be a string
+
+    >>> say_my_name(True, "White")
+    Traceback (most recent call last):
+    TypeError: first_name must be a string
+
+``last_name`` must be a string
+----------------------------------
+
+    >>> say_my_name("John", 12)
+    Traceback (most recent call last):
+    TypeError: last_name must be a string
+
+    >>> say_my_name("John", None)
+    Traceback (most recent call last):
+    TypeError: last_name must be a string
+
+    >>> say_my_name("John", [1, 2])
+    Traceback (most recent call last):
+    TypeError: last_name must be a string
+
+``first_name`` is validated before ``last_name``
+------------------------------------------------------
+
+    >>> say_my_name(None, None)
+    Traceback (most recent call last):
+    TypeError: first_name must be a string

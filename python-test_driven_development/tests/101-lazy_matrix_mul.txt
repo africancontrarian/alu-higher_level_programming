@@ -1,0 +1,90 @@
+The ``101-lazy_matrix_mul`` module
+======================================
+
+This module defines ``lazy_matrix_mul``, a function that multiplies
+two matrices by delegating to NumPy's ``matmul``. NumPy itself is
+responsible for validating the inputs and raising its own errors.
+
+Import the function
+--------------------
+
+    >>> lazy_matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
+
+Basic usage
+------------
+
+    >>> print(lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]]))
+    [[ 7 10]
+     [15 22]]
+
+    >>> print(lazy_matrix_mul([[1, 2]], [[3, 4], [5, 6]]))
+    [[13 16]]
+
+    >>> print(lazy_matrix_mul([[1, 0], [0, 1]], [[5, 6], [7, 8]]))
+    [[5 6]
+     [7 8]]
+
+    >>> print(lazy_matrix_mul([[-1, 2]], [[3], [-4]]))
+    [[-11]]
+
+Works with floats
+--------------------
+
+    >>> print(lazy_matrix_mul([[1.5, 2.5]], [[2], [2]]))
+    [[8.]]
+
+The original inputs are not mutated
+---------------------------------------
+
+    >>> m_a = [[1, 2], [3, 4]]
+    >>> m_b = [[1, 2], [3, 4]]
+    >>> result = lazy_matrix_mul(m_a, m_b)
+    >>> m_a
+    [[1, 2], [3, 4]]
+    >>> m_b
+    [[1, 2], [3, 4]]
+
+Invalid inputs let NumPy raise its own errors
+----------------------------------------------------
+
+The exact wording of NumPy's error messages can differ between
+versions, so these tests only check that the expected exception
+*type* is raised, not the exact message.
+
+Matrices that can't be multiplied (inner dimensions don't match):
+
+    >>> try:
+    ...     lazy_matrix_mul([[1, 2]], [[1, 2, 3]])
+    ... except ValueError:
+    ...     print("ValueError raised")
+    ValueError raised
+
+    >>> try:
+    ...     lazy_matrix_mul([[1, 2]], [[1, 2]])
+    ... except ValueError:
+    ...     print("ValueError raised")
+    ValueError raised
+
+A matrix that isn't a list of lists:
+
+    >>> try:
+    ...     lazy_matrix_mul(1, [[1]])
+    ... except ValueError:
+    ...     print("ValueError raised")
+    ValueError raised
+
+A matrix whose rows aren't all the same size:
+
+    >>> try:
+    ...     lazy_matrix_mul([[1, 2], [3]], [[1], [2]])
+    ... except ValueError:
+    ...     print("ValueError raised")
+    ValueError raised
+
+A matrix containing a non-numeric element:
+
+    >>> try:
+    ...     lazy_matrix_mul([[1, 2]], [[1, "a"]])
+    ... except TypeError:
+    ...     print("TypeError raised")
+    TypeError raised
