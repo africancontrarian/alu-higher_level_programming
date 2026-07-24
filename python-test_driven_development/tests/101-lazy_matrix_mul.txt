@@ -2,7 +2,7 @@ The ``101-lazy_matrix_mul`` module
 ======================================
 
 This module defines ``lazy_matrix_mul``, a function that multiplies
-two matrices by delegating directly to NumPy's ``dot``. NumPy
+two matrices by delegating directly to NumPy's ``matmul``. NumPy
 itself is responsible for validating the inputs and raising its own
 errors; the exact wording of those errors comes from the NumPy
 version installed (this project pins ``numpy==1.15.0``).
@@ -96,3 +96,17 @@ Matrices that can't be multiplied (inner dimensions don't match)
     >>> lazy_matrix_mul([[1, 2, 3], [3, 4, 5]], [[1, 2], [3, 4]])
     Traceback (most recent call last):
     ValueError: shapes (2,3) and (2,2) not aligned: 3 (dim 1) != 2 (dim 0)
+
+Both ``m_a`` and ``m_b`` are required arguments
+-----------------------------------------------------
+
+``lazy_matrix_mul`` has no default values, so calling it without
+both arguments raises Python's own ``TypeError``.
+
+    >>> lazy_matrix_mul([[1, 2]])
+    Traceback (most recent call last):
+    TypeError: lazy_matrix_mul() missing 1 required positional argument: 'm_b'
+
+    >>> lazy_matrix_mul()
+    Traceback (most recent call last):
+    TypeError: lazy_matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
