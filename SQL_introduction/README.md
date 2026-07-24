@@ -39,5 +39,5 @@ simple functions (`COUNT`, `AVG`) and `GROUP BY`.
 | `103-max_state.sql`                    | Max temperature per state, ordered by state name                  |
 
 Tasks 101-103 query a `temperatures` table (`id`, `city`, `state`, `month`,
-`day`, `year`, `temperature`) imported from the dump provided with the
-project; the scripts themselves only contain the `SELECT` queries.
+`day`, `year`, `value`) imported from the dump provided with the project;
+the scripts themselves only contain the `SELECT` queries.
