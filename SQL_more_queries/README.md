@@ -33,8 +33,13 @@ multiple tables.
 | `14-my_genres.sql`                            | All genres of the show `Dexter`                                      |
 | `15-comedy_only.sql`                          | All `Comedy` shows                                                   |
 | `16-shows_by_genre.sql`                       | All shows with their genre(s), `NULL` if none                        |
+| `100-not_my_genres.sql`                       | Genres not linked to the show `Dexter`                                |
+| `101-not_a_comedy.sql`                        | Shows not linked to the `Comedy` genre                                |
+| `102-rating_shows.sql`                        | Shows by rating (sum), descending                                     |
+| `103-rating_genres.sql`                       | Genres by rating (sum), descending                                    |
 
-Tasks 10-16 query the `hbtn_0d_tvshows` database dump provided with the
-project (`tv_shows(id, title)`, `tv_genres(id, name)`,
-`tv_show_genres(show_id, genre_id)`); the scripts themselves only
-contain the queries.
+Tasks 10-16 and 100-101 query the `hbtn_0d_tvshows` database dump
+provided with the project (`tv_shows(id, title)`, `tv_genres(id, name)`,
+`tv_show_genres(show_id, genre_id)`). Tasks 102-103 query a separate
+`hbtn_0d_tvshows_rate` dump, adding a `tv_show_ratings(show_id, rate)`
+table. The scripts themselves only contain the queries.
