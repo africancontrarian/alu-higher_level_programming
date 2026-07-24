@@ -82,3 +82,13 @@ Both names can be empty strings
     >>> say_my_name(None, None)
     Traceback (most recent call last):
     TypeError: first_name must be a string
+
+Only ``first_name`` is a required argument
+------------------------------------------------
+
+``last_name`` has a default value, so calling with no arguments at
+all is missing only ``first_name``.
+
+    >>> say_my_name()
+    Traceback (most recent call last):
+    TypeError: say_my_name() missing 1 required positional argument: 'first_name'
