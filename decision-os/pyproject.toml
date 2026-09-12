@@ -1,0 +1,9 @@
+[project]
+name = "decision-os"
+version = "0.1.0"
+description = "A sovereign, agnostic decision platform for the enterprise."
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
